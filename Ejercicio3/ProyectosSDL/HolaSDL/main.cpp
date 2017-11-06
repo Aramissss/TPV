@@ -3,11 +3,17 @@
 #include "SDL_image.h"
 #include <iostream>
 #include <string>
+#include "Game.h"
 typedef unsigned int uint;
 
 using namespace std;
+int main(int argc, char* argv[]) {
+	Game* game;
+	game->run();
 
+}
 
+/*
 int main(int argc, char* argv[]){
 	
 	SDL_Window* window = nullptr;
@@ -31,6 +37,7 @@ int main(int argc, char* argv[]){
 			SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer, surface);
 			SDL_FreeSurface(surface);
 			SDL_RenderCopy(renderer, texture, nullptr, nullptr);
+			
 		    //SDL_RenderPresent(renderer);
 
 			string filenamePerro = "..\\images\\dog.png";
@@ -126,3 +133,4 @@ int main(int argc, char* argv[]){
 		SDL_Quit();
 	return 0;
 }
+*/
