@@ -1,32 +1,8 @@
-﻿  main.cpp
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(16): error C2143: syntax error: missing ';' before '*'
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(16): error C2238: unexpected token(s) preceding ';'
-  Texture.cpp
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.cpp(14): error C2572: 'Texture::load': redefinition of default argument: parameter 1
-  c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.h(22): note: see declaration of 'Texture::load'
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.cpp(14): error C2572: 'Texture::load': redefinition of default argument: parameter 2
-  c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.h(22): note: see declaration of 'Texture::load'
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.cpp(31): error C2572: 'Texture::render': redefinition of default argument: parameter 1
-  c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.h(23): note: see declaration of 'Texture::render'
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.cpp(34): error C2572: 'Texture::renderWindow': redefinition of default argument: parameter 1
-  c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.h(26): note: see declaration of 'Texture::renderWindow'
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.cpp(37): error C2572: 'Texture::renderFrame': redefinition of default argument: parameter 1
-  c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\texture.h(24): note: see declaration of 'Texture::renderFrame'
-  Game.cpp
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(16): error C2143: syntax error: missing ';' before '*'
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(16): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(16): error C2238: unexpected token(s) preceding ';'
-  Dog.cpp
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(15): error C3646: 'dog': unknown override specifier
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\game.h(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
-c:\users\gabri\documents\github\tpv\ejercicio3\proyectossdl\holasdl\dog.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-  Generating Code...
+﻿Build started 07/11/2017 21:34:36.
+     1>Project "C:\Users\Daniel\Desktop\Trabajos\TPV\TPV\Ejercicio3\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
+     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.Cpp.Platform.targets(64,5): error MSB8020: The build tools for v140 (Platform Toolset = 'v140') cannot be found. To build using the v140 build tools, please install v140 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Upgrade Solution...".
+     1>Done Building Project "C:\Users\Daniel\Desktop\Trabajos\TPV\TPV\Ejercicio3\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.48
