@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <fstream>
 
 
 Game::Game()
@@ -7,7 +8,7 @@ Game::Game()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Pacman", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	gamemap = new GameMap(20, 20);//Valor de prueba 20x20
+	//gamemap = new GameMap(20, 20);//Valor de prueba 20x20
 
 
 	if (renderer == nullptr)//Si hay errores activa el flag
@@ -20,7 +21,7 @@ Game::Game()
 		pacmanText = new Texture();
 		redText = new Texture();
 		orangeText = new Texture();
-		pinkText = new Texture();
+		//pinkText = new Texture();
 		blueText = new Texture();
 		purpleText = new Texture();
 		
@@ -30,19 +31,19 @@ Game::Game()
 		pacmanText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		redText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		orangeText->load(renderer, "..\\images\\characters1.png", 4, 14);
-		pinkText->load(renderer, "..\\images\\characters1.png", 4, 14);
+		//pinkText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		blueText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		purpleText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		//Fin
 		
-		//Inicializa Entidades
+		/*Inicializa Entidades
 		pacman = new Pacman(this);
-		redGhost = new Ghost(this, 0, 0, 0);
+		//redGhost = new Ghost(this, 0, 0, 0);
 		orangeGhost = new Ghost(this, 1, 1, 2);
 		pinkGhost = new Ghost(this, 2, 2, 4);
 		blueGhost = new Ghost(this, 3, 3, 6);
 		purpleGhost = new Ghost(this, 4, 4, 8);
-		//Fin
+		//Fin*/
 	}
 }
 Game::~Game()
@@ -51,7 +52,7 @@ Game::~Game()
 	pacman->~Pacman();
 	redGhost->~Ghost();
 	orangeGhost->~Ghost();
-	pinkGhost->~Ghost();
+	//pinkGhost->~Ghost();
 	blueGhost->~Ghost();
 	purpleGhost->~Ghost();
 	//Fin
@@ -62,26 +63,93 @@ Game::~Game()
 	delete pacman;
 	delete redGhost;
 	delete orangeGhost;
-	delete pinkGhost;
+	//delete pinkGhost;
 	delete blueGhost;
 	delete purpleGhost;
 	//Fin
+
+}
+void Game::createMap()
+{
+	ifstream archivo;
+	archivo.open("..\\levels\\level01.dat");
+	uint rows, cols;
+	archivo >> rows;
+	archivo >> cols;	
+	int dato;
+	gamemap = new GameMap(this,rows, cols);
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < cols; j++)
+		{
+			archivo >> dato;
+			if (dato == 0){
+				gamemap->cells[j][i] = Empty;
+			}
+			else if (dato == 1){
+				gamemap->cells[j][i] = Wall;
+				gamemap->walls++;
+			}
+			else if (dato == 2){
+				gamemap->cells[j][i] = Food;
+				gamemap->foods++;
+			}
+			else if (dato == 3){
+				gamemap->cells[j][i] = Vitamins;
+				gamemap->vitamins++;
+			}
+			else if (dato == 6)
+			{
+				gamemap->cells[j][i] = Empty;
+				redGhost = new Ghost(this, i, j, 0);
+			}
+			else if (dato == 5)
+			{
+				gamemap->cells[j][i] = Empty;
+				orangeGhost = new Ghost(this, i, j, 2);
+			}
+			else if (dato == 4)
+			{
+				/*gamemap->cells[j][i] = Empty;
+				pinkGhost = new Ghost(this, i, j, 0);*/
+			}
+			else if (dato == 7)
+			{
+				gamemap->cells[j][i] = Empty;
+				blueGhost = new Ghost(this, i, j, 6);
+			}
+			else if (dato == 8)
+			{
+				gamemap->cells[j][i] = Empty;
+				purpleGhost = new Ghost(this, i, j, 8);
+			}
+			else if (dato == 9)
+			{
+				gamemap->cells[j][i] = Empty;
+				pacman = new Pacman(this);
+			}
+		}
+	}
+	
+	gamemap->mapTexts();
+	archivo.close();
 
 }
 void Game::update(){
 	pacman->update();
 	redGhost->update();
 	orangeGhost->update();
-	pinkGhost->update();
+//	pinkGhost->update();
 	blueGhost->update();
 	purpleGhost->update();
 }
 void Game::render(){
 	SDL_RenderClear(renderer);
+	gamemap->renderMap();
 	pacman->render();
 	redGhost->render();
 	orangeGhost->render();
-	pinkGhost->render();
+	//pinkGhost->render();
 	blueGhost->render();
 	purpleGhost->render();
 	SDL_RenderPresent(renderer);
@@ -111,7 +179,9 @@ void Game::handleEvents()
 	}
 }
 
+
 void Game::run(){
+	createMap();
 	while (!exit){
 		handleEvents();
 		update();

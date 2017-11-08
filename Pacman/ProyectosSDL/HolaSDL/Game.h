@@ -20,7 +20,7 @@ private:
 	Pacman* pacman;
 	Ghost* redGhost;
 	Ghost* orangeGhost;
-	Ghost* pinkGhost;
+	//Ghost* pinkGhost;
 	Ghost* blueGhost;
 	Ghost* purpleGhost;
 	//Fin Endidades
@@ -39,7 +39,7 @@ public:
 	Texture* pacmanText;
 	Texture* redText;
 	Texture* orangeText;
-	Texture* pinkText;
+	//Texture* pinkText;
 	Texture* blueText;
 	Texture* purpleText;
 	//Fin Texturas
@@ -52,5 +52,6 @@ public:
 	void update();
 	void render();
 	void createMap();
+	
 };
 
