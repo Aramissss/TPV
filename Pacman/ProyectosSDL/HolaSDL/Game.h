@@ -4,6 +4,8 @@
 #include "Pacman.h"
 #include "GameMap.h"
 #include "Ghost.h"
+#include <string>
+#include <iostream>
 
 using namespace std;
 class Game
@@ -16,13 +18,7 @@ private:
 	SDL_Event event;
 	int winX, winY;	
 
-	//Entidades
-	Pacman* pacman;
-	Ghost* redGhost;
-	Ghost* orangeGhost;
-	//Ghost* pinkGhost;
-	Ghost* blueGhost;
-	Ghost* purpleGhost;
+	
 	//Fin Endidades
 	
 	
@@ -34,6 +30,13 @@ public:
 	/*uint rows = 20;
 	uint cols = 20;
 	MapCell cells[20][20];*/
+	//Entidades
+	Pacman* pacman;
+	Ghost* redGhost;
+	Ghost* orangeGhost;
+	//Ghost* pinkGhost;
+	Ghost* blueGhost;
+	Ghost* purpleGhost;
 
 	//Texturas
 	Texture* pacmanText;

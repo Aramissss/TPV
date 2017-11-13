@@ -37,14 +37,16 @@ void GameMap::mapTexts()
 		WallsTex[i] = new Texture();
 		WallsTex[i]->load(game->renderer, "..\\images\\wall2.png", 1, 1);
 	}
-	/*for (int i = 0; i < foods; i++)
+	for (int i = 0; i < foods; i++)
 	{
-		FoodsTex[i]->load(game->renderer, "..\images\wall2.png", 1, 1);
+		FoodsTex[i] = new Texture();
+		FoodsTex[i]->load(game->renderer, "..\\images\\food2.png", 1, 1);
 	}
 	for (int i = 0; i < vitamins; i++)
 	{
-		VitaminsTex[i]->load(game->renderer, "..\images\wall2.png", 1, 1);
-	}*/
+		VitaminsTex[i] = new Texture();
+		VitaminsTex[i]->load(game->renderer, "..\\images\\burguer1.png", 1, 1);
+	}
 }
 void GameMap::renderMap()
 {
@@ -60,18 +62,18 @@ void GameMap::renderMap()
 			{
 				rect.h = size.h;
 				rect.w = size.w;
-				rect.x = i*size.w;
-				rect.y = j*size.h;
+				rect.x = j*size.w;
+				rect.y = i*size.h;
 				WallsTex[w]->render(game->renderer, rect);
 				w++;
 
 			}
-			/*else if (cells[i][j] == Food)
+			else if (cells[i][j] == Food)
 			{
 				rect.h = size.h;
 				rect.w = size.w;
-				rect.x = i*size.w;
-				rect.y = j*size.h;
+				rect.x = j*size.w;
+				rect.y = i*size.h;
 				FoodsTex[f]->render(game->renderer, rect);
 				f++;
 
@@ -80,12 +82,12 @@ void GameMap::renderMap()
 			{
 				rect.h = size.h;
 				rect.w = size.w;
-				rect.x = i*size.w;
-				rect.y = j*size.h;
+				rect.x = j*size.w;
+				rect.y = i*size.h;
 				VitaminsTex[v]->render(game->renderer, rect);
 				v++;
 
-			}*/
+			}
 		}
 	}
 }

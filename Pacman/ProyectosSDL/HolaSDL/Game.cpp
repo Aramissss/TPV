@@ -4,7 +4,7 @@
 
 Game::Game()
 {
-	winX = winY = 200;
+	winX = winY = 50;
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Pacman", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
@@ -69,10 +69,12 @@ Game::~Game()
 	//Fin
 
 }
-void Game::createMap()
+void Game::createMap()//Lee de un archivo y crea la matriz del mapa
 {
 	ifstream archivo;
-	archivo.open("..\\levels\\level01.dat");
+	string nameFile;
+	cin >> nameFile;
+	archivo.open("..\\levels\\"+ nameFile +".dat");
 	uint rows, cols;
 	archivo >> rows;
 	archivo >> cols;	
@@ -84,29 +86,29 @@ void Game::createMap()
 		{
 			archivo >> dato;
 			if (dato == 0){
-				gamemap->cells[j][i] = Empty;
+				gamemap->cells[i][j] = Empty;
 			}
 			else if (dato == 1){
-				gamemap->cells[j][i] = Wall;
+				gamemap->cells[i][j] = Wall;
 				gamemap->walls++;
 			}
 			else if (dato == 2){
-				gamemap->cells[j][i] = Food;
+				gamemap->cells[i][j] = Food;
 				gamemap->foods++;
 			}
 			else if (dato == 3){
-				gamemap->cells[j][i] = Vitamins;
+				gamemap->cells[i][j] = Vitamins;
 				gamemap->vitamins++;
 			}
 			else if (dato == 6)
 			{
-				gamemap->cells[j][i] = Empty;
-				redGhost = new Ghost(this, i, j, 0);
+				gamemap->cells[i][j] = Empty;
+				redGhost = new Ghost(this, j, i, 0);
 			}
 			else if (dato == 5)
 			{
-				gamemap->cells[j][i] = Empty;
-				orangeGhost = new Ghost(this, i, j, 2);
+				gamemap->cells[i][j] = Empty;
+				orangeGhost = new Ghost(this, j, i, 2);
 			}
 			else if (dato == 4)
 			{
@@ -115,18 +117,18 @@ void Game::createMap()
 			}
 			else if (dato == 7)
 			{
-				gamemap->cells[j][i] = Empty;
-				blueGhost = new Ghost(this, i, j, 6);
+				gamemap->cells[i][j] = Empty;
+				blueGhost = new Ghost(this, j, i, 6);
 			}
 			else if (dato == 8)
 			{
-				gamemap->cells[j][i] = Empty;
-				purpleGhost = new Ghost(this, i, j, 8);
+				gamemap->cells[i][j] = Empty;
+				purpleGhost = new Ghost(this, j, i, 8);
 			}
 			else if (dato == 9)
 			{
-				gamemap->cells[j][i] = Empty;
-				pacman = new Pacman(this);
+				gamemap->cells[i][j] = Empty;
+				pacman = new Pacman(this, j, i);
 			}
 		}
 	}
@@ -164,16 +166,16 @@ void Game::handleEvents()
 		}
 		else if (event.type == SDL_KEYDOWN){
 			if (event.key.keysym.sym == SDLK_DOWN){
-				pacman->cambiaDir(0, 1);
+				pacman->cambiaDir('d');
 			}
 			else if (event.key.keysym.sym == SDLK_UP){
-				pacman->cambiaDir(0, -1);
+				pacman->cambiaDir('u');
 			}
 			else if (event.key.keysym.sym == SDLK_RIGHT){
-				pacman->cambiaDir(1, 0);
+				pacman->cambiaDir('r');
 			}
 			else if (event.key.keysym.sym == SDLK_LEFT){
-				pacman->cambiaDir(-1, 0);
+				pacman->cambiaDir('l');
 			}
 		}
 	}

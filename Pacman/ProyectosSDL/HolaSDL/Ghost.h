@@ -27,6 +27,7 @@ private:
 public:
 	Ghost(Game *dir, uint xI, uint yI, uint FcolI);
 	~Ghost();
+	void vuelveIni();
 	void cambiaDir(int dirX, int dirY);
 	void mueve(int dirX, int dirY);
 	void render();

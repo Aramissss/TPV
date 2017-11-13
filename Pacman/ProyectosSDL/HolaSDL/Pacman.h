@@ -17,10 +17,11 @@ private:
 	Texture* texture;
 	SDL_Rect destRect, srcRect;
 public:
-	Pacman(Game *dir);
+	Pacman(Game *dir, uint xI, uint yI);
 	~Pacman();
-	void cambiaDir(int dirX, int dirY);
-	void mueve(int dirX, int dirY);
+	void cambiaDir(char dir);
+	void mueve();
+	bool siguiente(int x, int y, int dirX, int dirY, int& nx, int& ny);
 	void render();
 	void update();
 };
