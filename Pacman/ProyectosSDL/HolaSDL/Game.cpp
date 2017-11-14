@@ -131,6 +131,7 @@ void Game::createMap()//Lee de un archivo y crea la matriz del mapa
 				pacman = new Pacman(this, j, i);
 			}
 		}
+	
 	}
 	
 	gamemap->mapTexts();
@@ -139,11 +140,12 @@ void Game::createMap()//Lee de un archivo y crea la matriz del mapa
 }
 void Game::update(){
 	pacman->update();
+	handleCollision();//Maneja las colisiones antes de que los fantasmas se muevan para que no puedan cruzarse
 	redGhost->update();
 	orangeGhost->update();
-//	pinkGhost->update();
 	blueGhost->update();
 	purpleGhost->update();
+	handleCollision();
 }
 void Game::render(){
 	SDL_RenderClear(renderer);
@@ -182,7 +184,6 @@ bool Game::nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la s
 	}
 	else return false;
 }
-
 void Game::handleEvents()
 {
 	while (SDL_PollEvent(&event) && !exit) {
@@ -192,16 +193,16 @@ void Game::handleEvents()
 		}
 		else if (event.type == SDL_KEYDOWN){
 			if (event.key.keysym.sym == SDLK_DOWN){
-				pacman->cambiaDir('d');
+				pacman->changeDir('d');
 			}
 			else if (event.key.keysym.sym == SDLK_UP){
-				pacman->cambiaDir('u');
+				pacman->changeDir('u');
 			}
 			else if (event.key.keysym.sym == SDLK_RIGHT){
-				pacman->cambiaDir('r');
+				pacman->changeDir('r');
 			}
 			else if (event.key.keysym.sym == SDLK_LEFT){
-				pacman->cambiaDir('l');
+				pacman->changeDir('l');
 			}
 		}
 	}
@@ -230,6 +231,12 @@ uint Game::getCols()
 {
 	return gamemap->cols;
 }
+int Game::getWinW(){
+	return winWidth;
+}
+int Game::getWinH(){
+	return winHeight;
+}
 void Game::run(){
 	createMap();
 	while (!exit){
@@ -237,5 +244,87 @@ void Game::run(){
 		update();
 		render();
 		SDL_Delay(200);
+	}
+}
+bool Game::PacmanBlueColl(){//Comprueba si hay un fantasma azul en la posición que Pacman
+	if (blueGhost->getPosX() == pacman->getPosX() && blueGhost->getPosY() == pacman->getPosY()){
+		return true;
+	}	
+	else return false;
+}
+bool Game::PacmanRedColl(){//Comprueba si hay un fantasma rojo en la posición que Pacman
+	if (redGhost->getPosX() == pacman->getPosX() && redGhost->getPosY() == pacman->getPosY()){
+		return true;
+	}
+	else return false;
+}
+bool Game::PacmanPurpleColl(){//Comprueba si hay un fantasma morado en la posición que Pacman
+	if (purpleGhost->getPosX() == pacman->getPosX() && purpleGhost->getPosY() == pacman->getPosY()){
+		return true;
+	}
+	else return false;
+}
+bool Game::PacmanOrangeColl(){//Comprueba si hay un fantasma naranja en la posición que Pacman
+	if (orangeGhost->getPosX() == pacman->getPosX() && orangeGhost->getPosY() == pacman->getPosY()){
+		return true;
+	}
+	else return false;
+}
+void Game::handleCollision(){//Gestiona las colisiones entre Pacman y los fantasmas
+	if (PacmanBlueColl()){
+		if (!blueGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
+			pacman->die();
+			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
+			redGhost->backToIni();
+			orangeGhost->backToIni();
+			purpleGhost->backToIni();
+			pacman->backToIni();
+		}
+		else{//Vuelve a su posición inicial y se vuelve invulnerable
+			blueGhost->backToIni();
+			blueGhost->vulnerabilityOff();
+		}
+	}
+	else if (PacmanRedColl()){
+		if (!redGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
+			pacman->die();
+			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
+			redGhost->backToIni();
+			orangeGhost->backToIni();
+			purpleGhost->backToIni();
+			pacman->backToIni();
+		}
+		else{//Vuelve a su posición inicial y se vuelve invulnerable
+			redGhost->backToIni();
+			redGhost->vulnerabilityOff();
+		}
+	}
+	else if (PacmanPurpleColl()){
+		if (!purpleGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
+			pacman->die();
+			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
+			redGhost->backToIni();
+			orangeGhost->backToIni();
+			purpleGhost->backToIni();
+			pacman->backToIni();
+		}
+		else{//Vuelve a su posición inicial y se vuelve invulnerable
+			purpleGhost->backToIni();
+			purpleGhost->vulnerabilityOff();
+		}
+	}
+	else if (PacmanOrangeColl()){
+		if (!orangeGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
+			pacman->die();
+			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
+			redGhost->backToIni();
+			orangeGhost->backToIni();
+			purpleGhost->backToIni();
+			pacman->backToIni();
+		}
+		else{//Vuelve a su posición inicial y se vuelve invulnerable
+			orangeGhost->backToIni();
+			orangeGhost->vulnerabilityOff();
+		}
 	}
 }

@@ -17,7 +17,8 @@ private:
 	
 	SDL_Event event;
 	int winX, winY;	
-
+	const int winWidth = 800;
+	const int winHeight = 600;
 	
 	//Fin Endidades
 	
@@ -25,11 +26,8 @@ private:
 	
 public:
 	GameMap* gamemap;
-	const int winWidth = 800;
-	const int winHeight = 600;
-	/*uint rows = 20;
-	uint cols = 20;
-	MapCell cells[20][20];*/
+	
+
 	//Entidades
 	Pacman* pacman;
 	Ghost* redGhost;
@@ -50,6 +48,8 @@ public:
 	SDL_Renderer* renderer;
 	Game();
 	~Game();
+	int getWinW();
+	int getWinH();
 	void run();
 	void handleEvents();
 	void update();
@@ -62,6 +62,10 @@ public:
 	uint getCols();
 	MapCell getCell(int x, int y);
 	void changeCell(int x, int y, MapCell cell);
-	
+	bool PacmanBlueColl();
+	bool PacmanRedColl();
+	bool PacmanPurpleColl();
+	bool PacmanOrangeColl();
+	void handleCollision();
 };
 

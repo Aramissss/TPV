@@ -14,8 +14,8 @@ GameMap::GameMap(Game* dir, uint rows, uint cols)
 	for (int r = 0; r < rows; r++){
 		cells[r] = new MapCell[cols];
 	}
-	size.h = game->winHeight / rows;
-	size.w = game->winWidth / cols;
+	size.h = game->getWinH() / rows;
+	size.w = game->getWinW() / cols;
 }
 
 GameMap::~GameMap()
@@ -26,6 +26,21 @@ GameMap::~GameMap()
 		}
 		delete[] cells;
 	}
+}
+uint GameMap::getRows(){
+	return rows;
+}
+uint GameMap::getCols(){
+	return cols;
+}
+uint GameMap::getWalls(){
+	return walls;
+}
+uint GameMap::getFoods(){
+	return foods;
+}
+uint GameMap::getVitamins(){
+	return vitamins;
 }
 void GameMap::mapTexts()
 {

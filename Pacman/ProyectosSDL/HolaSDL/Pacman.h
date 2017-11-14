@@ -8,20 +8,25 @@ class Game;
 class Pacman
 {
 private:
-	uint x, y, w, h;
+	uint x, y, w, h, xIni, yIni;
 	uint nx, ny;//La posición siguiente calculada
 	int dirX, dirY, ndirX, ndirY;
 	uint Frow, Fcol;//Columnas donde están los frames en la imagen fuente
 	Game* game;
 	Texture* texture;
 	SDL_Rect destRect, srcRect;
+	int lives;
 public:
 	Pacman(Game *dir, uint xI, uint yI);
 	~Pacman();
-	void cambiaDir(char dir);
-	void mueve();
-	bool siguiente(int x, int y, int dirX, int dirY, int& nx, int& ny);
+	bool checkGhost();
+	void changeDir(char dir);
+	void move();
 	void render();
 	void update();
+	int getPosX();
+	int getPosY();
+	void die();
+	void backToIni();
 };
 

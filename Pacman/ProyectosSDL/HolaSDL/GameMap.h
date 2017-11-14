@@ -15,16 +15,22 @@ private:
 	vector<Texture*> VitaminsTex;
 	Game* game;
 	SDL_Rect size;
-
-public:
 	uint rows;
 	uint cols;
 	uint walls;
 	uint foods;
 	uint vitamins;
+
+public:
+	
 	MapCell** cells;
 	GameMap(Game* dir,uint rows, uint cols);
 	~GameMap();
+	uint getRows();
+	uint getCols();
+	uint getWalls();
+	uint getFoods();
+	uint getVitamins();
 	void mapTexts();
 	void renderMap();
 };
