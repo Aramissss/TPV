@@ -53,8 +53,15 @@ public:
 	void run();
 	void handleEvents();
 	void update();
+	bool nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny);
 	void render();
 	void createMap();
+	void substractFood();
+	void substractVitamin();
+	uint getRows();
+	uint getCols();
+	MapCell getCell(int x, int y);
+	void changeCell(int x, int y, MapCell cell);
 	
 };
 

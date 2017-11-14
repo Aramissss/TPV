@@ -1,9 +1,27 @@
-﻿Build started 13/11/2017 23:48:22.
+﻿Build started 14/11/2017 12:29:32.
      1>Project "C:\Users\Aramis1996\Documents\Git\TPV\Pacman\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Ghost.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameMap.cpp Ghost.cpp Pacman.cpp main.cpp
+         Pacman.cpp
+         Game.cpp
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\game.cpp(83): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\game.cpp(85): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\game.cpp(163): warning C4018: '>=' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\game.cpp(175): warning C4018: '>=' : signed/unsigned mismatch
+         Generating Code...
+         Compiling...
+         main.cpp
          Ghost.cpp
      1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\ghost.cpp(2): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+         GameMap.cpp
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(14): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(24): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(35): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(40): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(45): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(57): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\aramis1996\documents\git\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(59): warning C4018: '<' : signed/unsigned mismatch
+         Generating Code...
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Aramis1996\Documents\Git\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Aramis1996\Documents\Git\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Aramis1996\Documents\Git\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\Game.obj
          Debug\GameMap.obj
@@ -16,4 +34,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.45
+Time Elapsed 00:00:04.64

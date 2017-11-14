@@ -7,9 +7,8 @@ Pacman::Pacman(Game *dir, uint xI, uint yI)//Dirección al juego
 	Fcol = 11;
 	game = dir;
 	texture = game->pacmanText;
-	gameMap = game->gamemap;
-	destRect.w = w = game->winWidth / gameMap->cols;//Calcula el tamaño del Pacman teniendo en relación la anchura de la ventana y las columnas
-	destRect.h = h = game->winHeight / gameMap->rows;
+	destRect.w = w = game->winWidth / game->getCols();//Calcula el tamaño del Pacman teniendo en relación la anchura de la ventana y las columnas
+	destRect.h = h = game->winHeight / game->getRows();
 	x = xI;
 	y = yI;
 	destRect.x = x*w;
@@ -20,52 +19,26 @@ Pacman::~Pacman()
 {
 	texture->~Texture();
 	delete texture;
-	delete gameMap;
 	delete game;
 }
-bool Pacman::siguiente(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la siguiente posición es una pared devuelve false
-{
-	nx = x + dirX;//Calcula la posición siguiente
-	ny = y + dirY;
-	if (ny >= gameMap->cols)//Estas condiciones hacen que el mapa tenga forma toroide
-	{
-		ny = 0;
-	}
-	else if (ny < 0)
-	{
-		ny = gameMap->cols - 1;
-	}
-	if (nx < 0)
-	{
-		nx = gameMap->rows - 1;
-	}
-	else if (nx >= gameMap->rows)
-	{
-		nx = 0;
-	}
-	if (gameMap->cells[ny][nx] != Wall)
-	{
-		return true;
-	}
-	else return false;
-}
+
 
 void Pacman::cambiaDir(char dir){//Según la letra introducida cambia la dirección si es posible
 	int nx, ny;
 	nx = ny = 0;
-	if (dir == 'u' && siguiente(x,y,0,-1,nx,ny)){//Up
+	if (dir == 'u' && game->nextCell(x,y,0,-1,nx,ny)){//Up
 		dirX = 0;
 		dirY = -1;
 	}
-	else if (dir == 'd' && siguiente(x, y, 0, 1, nx, ny)){//Down
+	else if (dir == 'd' && game->nextCell(x, y, 0, 1, nx, ny)){//Down
 		dirX = 0;
 		dirY = 1;
 	}
-	else if (dir == 'l' && siguiente(x, y, -1, 0, nx, ny)){//Left
+	else if (dir == 'l' && game->nextCell(x, y, -1, 0, nx, ny)){//Left
 		dirX = -1;
 		dirY = 0;
 	}
-	else if (dir == 'r' && siguiente(x, y, 1, 0, nx, ny)){//Right
+	else if (dir == 'r' && game->nextCell(x, y, 1, 0, nx, ny)){//Right
 		dirX = 1;
 		dirY = 0;
 	}
@@ -73,24 +46,24 @@ void Pacman::cambiaDir(char dir){//Según la letra introducida cambia la direcció
 void Pacman::mueve(){
 	int nx=0;
 	int ny=0;
-	if (siguiente(x, y, dirX, dirY,  nx, ny))//Si la posición siguiente devuelve true, entonces se puede mover
+	if (game->nextCell(x, y, dirX, dirY, nx, ny))//Si la posición siguiente devuelve true, entonces se puede mover
 	{
 		x = nx;
 		y = ny;
-		if (gameMap->cells[ny][nx] == Vitamins)//Cuando choca con una vitamina los fantasmas regresan a su posición original
+		if (game->getCell(nx,ny) == Vitamins)//Cuando choca con una vitamina los fantasmas regresan a su posición original
 		{
-			gameMap->vitamins--;
-			//INTRODUCIR QUE LOS FANTASMAS REGRESEN A SU POSICIÓN INICIAL
+			game->substractVitamin();
+			//LOS FANTASMAS REGRESAN A SU POSICIÓN INICIAL
 			game->orangeGhost->vuelveIni();
 			game->blueGhost->vuelveIni();
 			game->redGhost->vuelveIni();
 			game->purpleGhost->vuelveIni();
-			gameMap->cells[ny][nx] = Empty;
+			game->changeCell(nx, ny, Empty);//Cambia el valor de vitamina por vacío
 		}
-		else if (gameMap->cells[ny][nx] == Food)
+		else if (game->getCell(nx, ny) == Food)
 		{
-			gameMap->foods--;
-			gameMap->cells[ny][nx] = Empty;
+			game->substractFood();
+			game->changeCell(nx, ny, Empty);
 		}
 	}
 }

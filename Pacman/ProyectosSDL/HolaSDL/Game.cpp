@@ -156,6 +156,32 @@ void Game::render(){
 	purpleGhost->render();
 	SDL_RenderPresent(renderer);
 }
+bool Game::nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la siguiente posición es una pared devuelve false
+{
+	nx = x + dirX;//Calcula la posición siguiente
+	ny = y + dirY;
+	if (ny >= gamemap->cols)//Estas condiciones hacen que el mapa tenga forma toroide
+	{
+		ny = 0;
+	}
+	else if (ny < 0)
+	{
+		ny = gamemap->cols - 1;
+	}
+	if (nx < 0)
+	{
+		nx = gamemap->rows - 1;
+	}
+	else if (nx >= gamemap->rows)
+	{
+		nx = 0;
+	}
+	if (gamemap->cells[ny][nx] != Wall)
+	{
+		return true;
+	}
+	else return false;
+}
 
 void Game::handleEvents()
 {
@@ -180,8 +206,30 @@ void Game::handleEvents()
 		}
 	}
 }
-
-
+MapCell Game::getCell(int x, int y)//Devuelve el valor que hay en una celda
+{
+	return gamemap->cells[y][x];//La representación en la celda es al contrario
+}
+void Game::changeCell(int x, int y, MapCell cell)
+{
+	gamemap->cells[y][x] = cell;
+}
+void Game::substractFood()
+{
+	gamemap->foods--;
+}
+void Game::substractVitamin()
+{
+	gamemap->vitamins;
+}
+uint Game::getRows()
+{
+	return gamemap->rows;
+}
+uint Game::getCols()
+{
+	return gamemap->cols;
+}
 void Game::run(){
 	createMap();
 	while (!exit){

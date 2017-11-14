@@ -13,7 +13,6 @@ private:
 	int dirX, dirY;
 	uint Frow, Fcol;//Columnas donde están los frames en la imagen fuente
 	Game* game;
-	GameMap* gameMap;//Puntero provisional al mapa
 	Texture* texture;
 	SDL_Rect destRect, srcRect;
 public:
