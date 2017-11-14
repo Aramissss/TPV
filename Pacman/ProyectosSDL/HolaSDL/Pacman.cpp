@@ -26,26 +26,32 @@ Pacman::~Pacman()
 void Pacman::cambiaDir(char dir){//Según la letra introducida cambia la dirección si es posible
 	int nx, ny;
 	nx = ny = 0;
-	if (dir == 'u' && game->nextCell(x,y,0,-1,nx,ny)){//Up
-		dirX = 0;
-		dirY = -1;
+	if (dir == 'u'){//Up
+		ndirX = 0;
+		ndirY = -1;
 	}
-	else if (dir == 'd' && game->nextCell(x, y, 0, 1, nx, ny)){//Down
-		dirX = 0;
-		dirY = 1;
+	else if (dir == 'd'){//Down
+		ndirX = 0;
+		ndirY = 1;
 	}
-	else if (dir == 'l' && game->nextCell(x, y, -1, 0, nx, ny)){//Left
-		dirX = -1;
-		dirY = 0;
+	else if (dir == 'l'){//Left
+		ndirX = -1;
+		ndirY = 0;
 	}
-	else if (dir == 'r' && game->nextCell(x, y, 1, 0, nx, ny)){//Right
-		dirX = 1;
-		dirY = 0;
+	else if (dir == 'r'){//Right
+		ndirX = 1;
+		ndirY = 0;
 	}
+
 }
 void Pacman::mueve(){
 	int nx=0;
 	int ny=0;
+	if (game->nextCell(x, y, ndirX, ndirY, nx, ny)){//Si la posición pulsada en ese momento es posible
+		dirX = ndirX; // entonces la dirección actual toma ese valor (Búffer)
+		dirY = ndirY;
+	}
+	nx = ny = 0;
 	if (game->nextCell(x, y, dirX, dirY, nx, ny))//Si la posición siguiente devuelve true, entonces se puede mover
 	{
 		x = nx;

@@ -10,7 +10,7 @@ class Pacman
 private:
 	uint x, y, w, h;
 	uint nx, ny;//La posición siguiente calculada
-	int dirX, dirY;
+	int dirX, dirY, ndirX, ndirY;
 	uint Frow, Fcol;//Columnas donde están los frames en la imagen fuente
 	Game* game;
 	Texture* texture;
