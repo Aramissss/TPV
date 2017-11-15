@@ -20,6 +20,7 @@ private:
 public:
 	Pacman(Game *dir, uint xI, uint yI);
 	~Pacman();
+	int getLives();
 	void handleAnimation();
 	void upAnimation();
 	void downAnimation();

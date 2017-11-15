@@ -19,7 +19,9 @@ Pacman::Pacman(Game *dir, uint xI, uint yI)//Dirección al juego
 Pacman::~Pacman()
 {	
 }
-
+int Pacman::getLives(){
+	return lives;
+}
 
 void Pacman::changeDir(char dir){//Según la letra introducida cambia la dirección si es posible
 	int nx, ny;

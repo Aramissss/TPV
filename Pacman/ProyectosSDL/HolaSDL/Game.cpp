@@ -4,7 +4,7 @@
 
 Game::Game()
 {
-	level = 5;
+	level = 1;
 	winX = winY = 50;
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Pacman", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
@@ -29,6 +29,9 @@ Game::Game()
 		levelCText = new Texture();
 		gameOverText = new Texture();
 		gameWonText = new Texture();
+		life1 = new Texture();
+		life2 = new Texture();
+		life3 = new Texture();
 		
 		//Fin
 
@@ -36,26 +39,19 @@ Game::Game()
 		pacmanText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		redText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		orangeText->load(renderer, "..\\images\\characters1.png", 4, 14);
-		//pinkText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		blueText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		purpleText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		menuText->load(renderer, "..\\images\\pacmanMenu.png");
 		levelCText->load(renderer, "..\\images\\levelCleared.png");
 		gameOverText->load(renderer, "..\\images\\gameOver.png");
 		gameWonText->load(renderer, "..\\images\\gameWon.png");
-
+		life1->load(renderer, "..\\images\\characters1.png", 4, 14);
+		life2->load(renderer, "..\\images\\characters1.png", 4, 14);
+		life3->load(renderer, "..\\images\\characters1.png", 4, 14);
 		//Fin
 		windowRect.x = windowRect.y = 0;
 		windowRect.w = winWidth;
-		windowRect.h = winHeight;
-		/*Inicializa Entidades
-		pacman = new Pacman(this);
-		//redGhost = new Ghost(this, 0, 0, 0);
-		orangeGhost = new Ghost(this, 1, 1, 2);
-		pinkGhost = new Ghost(this, 2, 2, 4);
-		blueGhost = new Ghost(this, 3, 3, 6);
-		purpleGhost = new Ghost(this, 4, 4, 8);
-		//Fin*/
+		windowRect.h = winHeight;		
 	}
 }
 Game::~Game()
@@ -84,22 +80,50 @@ Game::~Game()
 	SDL_Quit();
 
 }
+void Game::setLifeSize(){
+	life1Rect.w = life2Rect.w = life3Rect.w = winWidth / getCols();
+	life1Rect.h = life2Rect.h = life3Rect.h = winHeight / getRows();
+	life1Rect.x = 0;
+	life2Rect.x = 0 + winWidth / getCols();
+	life3Rect.x = 0 + 2 * winWidth / getCols();
+	life1Rect.y = life2Rect.y = life3Rect.y = winHeight - (winHeight / getRows());
+}
+void Game::renderLives(){
+
+	if (pacman->getLives() == 3){
+		life1->renderFrame(renderer, lifeSrcRect, life1Rect, 0, 10);
+		life2->renderFrame(renderer, lifeSrcRect, life2Rect, 0, 10);
+		life3->renderFrame(renderer, lifeSrcRect, life3Rect, 0, 10);
+	}
+	else if (pacman->getLives() == 2){
+		life1->renderFrame(renderer, lifeSrcRect, life1Rect, 0, 10);
+		life2->renderFrame(renderer, lifeSrcRect, life2Rect, 0, 10);
+	}
+	else if (pacman->getLives() == 1){
+		life1->renderFrame(renderer, lifeSrcRect, life1Rect, 0, 10);
+	}
+}
 void Game::nextLevel(){
 	exitlevel = false;
 	if (level == 1){
 		createMap("level01");
+		setLifeSize();
 	}
 	else if (level == 2){
 		createMap("level02");
+		setLifeSize();
 	}
 	else if (level == 3){
 		createMap("level03");
+		setLifeSize();
 	}
 	else if (level == 4){
 		createMap("level04");
+		setLifeSize();
 	}
 	else if (level == 5){
 		createMap("level05");
+		setLifeSize();
 	}
 	else exit = true;
 }
@@ -189,6 +213,7 @@ void Game::render(){
 	//pinkGhost->render();
 	blueGhost->render();
 	purpleGhost->render();
+	renderLives();
 	SDL_RenderPresent(renderer);
 }
 bool Game::nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la siguiente posición es una pared devuelve false

@@ -25,8 +25,13 @@ private:
 	Texture* levelCText;
 	Texture* gameOverText;
 	Texture* gameWonText;
+	Texture* life1;
+	Texture* life2;
+	Texture* life3;
 	bool exitMenu = false;
 	SDL_Rect windowRect;
+	SDL_Rect lifeSrcRect;
+	SDL_Rect life1Rect, life2Rect, life3Rect;
 	uint level;
 	
 public:
@@ -54,6 +59,7 @@ public:
 	void nextLevel();
 	int getWinW();
 	int getWinH();
+	void setLifeSize();
 	void run();
 	void menuEvents();
 	void menuRender();
@@ -61,6 +67,7 @@ public:
 	void gameOverRender();
 	void gameWonRender();
 	void handleEvents();
+	void renderLives();
 	void update();
 	bool nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny);
 	void render();
