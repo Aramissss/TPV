@@ -17,9 +17,7 @@ Pacman::Pacman(Game *dir, uint xI, uint yI)//Dirección al juego
 	lives = 3;
 }
 Pacman::~Pacman()
-{
-	//delete texture;
-	//delete game;
+{	
 }
 
 
@@ -89,19 +87,19 @@ void Pacman::handleAnimation(){
 }
 void Pacman::upAnimation(){
 	Frow = 3;
-	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
 }
 void Pacman::downAnimation(){
 	Frow = 1;
-	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
 }
 void Pacman::leftAnimation(){
 	Frow = 2;
-	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
 }
 void Pacman::rightAnimation(){
 	Frow = 0;
-	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
 }
 void Pacman::render(){
 	texture->renderFrame(game->renderer, srcRect, destRect, Frow, Fcol);

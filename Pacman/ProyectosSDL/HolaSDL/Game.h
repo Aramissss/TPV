@@ -14,15 +14,20 @@ private:
 	SDL_Window* window;
 	bool error = false;//Flag para errores
 	bool exit = false;
+	bool exitlevel = false;
+	bool gameover = false;
 	
 	SDL_Event event;
 	int winX, winY;	
 	const int winWidth = 800;
 	const int winHeight = 600;
-	
-	//Fin Endidades
-	
-	
+	Texture* menuText;
+	Texture* levelCText;
+	Texture* gameOverText;
+	Texture* gameWonText;
+	bool exitMenu = false;
+	SDL_Rect windowRect;
+	uint level;
 	
 public:
 	GameMap* gamemap;
@@ -46,14 +51,20 @@ public:
 	SDL_Renderer* renderer;
 	Game();
 	~Game();
+	void nextLevel();
 	int getWinW();
 	int getWinH();
 	void run();
+	void menuEvents();
+	void menuRender();
+	void nextLevelRender();
+	void gameOverRender();
+	void gameWonRender();
 	void handleEvents();
 	void update();
 	bool nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny);
 	void render();
-	void createMap();
+	void createMap(string filename);
 	void substractFood();
 	void substractVitamin();
 	void checkEndGame();

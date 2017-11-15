@@ -64,10 +64,11 @@ void Ghost::move()//Escoge una dirección aleatoria del vector y la aplica
 	{
 		y = game->getRows() - 1;
 	}
-	else if (x >= game->getRows())
+	else if (y >= game->getRows())
 	{
 		y = 0;
 	}
+	
 	dir.clear();//Limpia el vector de direcciones
 }
 void Ghost::render(){
@@ -87,6 +88,7 @@ void Ghost::searchDir()//REllena un vector con las direcciones posibles para el 
 			dir.push_back(aux);//Mete la dirección derecha al vector si es posible
 		}
 	}
+	nx = ny = 0;
 	if (game->nextCell(x, y, -1, 0, nx, ny))//Izquierda
 	{
 		if (!(dirX == 1 && dirY == 0)){//Solo añade la dirección si no es la contraria
@@ -95,6 +97,7 @@ void Ghost::searchDir()//REllena un vector con las direcciones posibles para el 
 			dir.push_back(aux);
 		}
 	}
+	nx = ny = 0;
 	if (game->nextCell(x, y, 0, 1, nx, ny))//Abajo
 	{
 		if (!(dirX == 0 && dirY == -1)){//Solo añade la dirección si no es la contraria
@@ -103,6 +106,7 @@ void Ghost::searchDir()//REllena un vector con las direcciones posibles para el 
 			dir.push_back(aux);
 		}
 	}
+	nx = ny = 0;
 	if (game->nextCell(x, y, 0, -1, nx, ny))//Arriba
 	{
 		if (!(dirX == 0 && dirY == 1)){//Solo añade la dirección si no es la contraria
@@ -122,15 +126,15 @@ void Ghost::update(){
 	if (!vulnerable){
 		standardAnimation();
 	}
-	else blueAnimation();
+	else blueAnimation();	
 }
 void Ghost::standardAnimation(){//Se encarga de las animaciones cuando son invulnerables
-	Fcol = IniFcol+((SDL_GetTicks() / 500) % 2);
-	Frow = IniFrow + ((SDL_GetTicks() / 500) % 4);
+	Fcol = IniFcol+((SDL_GetTicks() / 150) % 2);
+	Frow = IniFrow + ((SDL_GetTicks() / 150) % 4);
 }
 void Ghost::blueAnimation(){//Hace la animación de cuando los fantasmas están azules
-	Fcol = bFcol + ((SDL_GetTicks() / 500) % 2);
-	Frow = bFrow + ((SDL_GetTicks() / 500) % 2);
+	Fcol = bFcol + ((SDL_GetTicks() / 150) % 2);
+	Frow = bFrow + ((SDL_GetTicks() / 150) % 2);
 }
 int Ghost::getPosX(){//Devuelve la posición x
 	return x;

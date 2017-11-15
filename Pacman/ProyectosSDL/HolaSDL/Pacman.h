@@ -8,8 +8,8 @@ class Game;
 class Pacman
 {
 private:
-	uint x, y, w, h, xIni, yIni;
-	uint nx, ny;//La posición siguiente calculada
+	int x, y, w, h, xIni, yIni;
+	int nx, ny;//La posición siguiente calculada
 	int dirX, dirY, ndirX, ndirY;
 	uint Frow, Fcol;//Columnas donde están los frames en la imagen fuente
 	uint IniFrow, IniFcol; //Columnas iniciales donde están los frames

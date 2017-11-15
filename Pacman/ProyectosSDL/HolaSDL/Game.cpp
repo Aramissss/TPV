@@ -4,6 +4,7 @@
 
 Game::Game()
 {
+	level = 5;
 	winX = winY = 50;
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Pacman", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
@@ -24,6 +25,10 @@ Game::Game()
 		//pinkText = new Texture();
 		blueText = new Texture();
 		purpleText = new Texture();
+		menuText = new Texture();
+		levelCText = new Texture();
+		gameOverText = new Texture();
+		gameWonText = new Texture();
 		
 		//Fin
 
@@ -34,8 +39,15 @@ Game::Game()
 		//pinkText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		blueText->load(renderer, "..\\images\\characters1.png", 4, 14);
 		purpleText->load(renderer, "..\\images\\characters1.png", 4, 14);
+		menuText->load(renderer, "..\\images\\pacmanMenu.png");
+		levelCText->load(renderer, "..\\images\\levelCleared.png");
+		gameOverText->load(renderer, "..\\images\\gameOver.png");
+		gameWonText->load(renderer, "..\\images\\gameWon.png");
+
 		//Fin
-		
+		windowRect.x = windowRect.y = 0;
+		windowRect.w = winWidth;
+		windowRect.h = winHeight;
 		/*Inicializa Entidades
 		pacman = new Pacman(this);
 		//redGhost = new Ghost(this, 0, 0, 0);
@@ -54,9 +66,10 @@ Game::~Game()
 	delete blueText;
 	delete orangeText;
 	delete purpleText;
+	delete menuText;
 	//Fin
 
-	delete gamemap;
+	//delete gamemap;
 
 	//Borra entidades
 	delete pacman;
@@ -71,12 +84,29 @@ Game::~Game()
 	SDL_Quit();
 
 }
-void Game::createMap()//Lee de un archivo y crea la matriz del mapa
+void Game::nextLevel(){
+	exitlevel = false;
+	if (level == 1){
+		createMap("level01");
+	}
+	else if (level == 2){
+		createMap("level02");
+	}
+	else if (level == 3){
+		createMap("level03");
+	}
+	else if (level == 4){
+		createMap("level04");
+	}
+	else if (level == 5){
+		createMap("level05");
+	}
+	else exit = true;
+}
+void Game::createMap(string fileName)//Lee de un archivo y crea la matriz del mapa
 {
 	ifstream archivo;
-	string nameFile;
-	cin >> nameFile;
-	archivo.open("..\\levels\\"+ nameFile +".dat");
+	archivo.open("..\\levels\\"+ fileName +".dat");
 	uint rows, cols;
 	archivo >> rows;
 	archivo >> cols;	
@@ -187,12 +217,48 @@ bool Game::nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la s
 	}
 	else return false;
 }
+void Game::menuEvents()//Comprueba eventos del menú
+{
+	while (SDL_PollEvent(&event) && !exitMenu) {
+		if (event.type == SDL_QUIT)//Si cierra la ventana termina el juego directamente
+		{
+			exitMenu = true;
+			exit = true;
+		}
+		else if (event.type == SDL_KEYDOWN){
+			if (event.key.keysym.sym != NULL){
+				exitMenu = true;
+			}
+		}
+	}
+}
+void Game::menuRender(){
+	SDL_RenderClear(renderer);
+	menuText->render(renderer, windowRect);
+	SDL_RenderPresent(renderer);
+}
+void Game::nextLevelRender(){
+	SDL_RenderClear(renderer);
+	levelCText->render(renderer, windowRect);
+	SDL_RenderPresent(renderer);
+}
+void Game::gameOverRender(){
+	SDL_RenderClear(renderer);
+	gameOverText->render(renderer, windowRect);
+	SDL_RenderPresent(renderer);
+}
+void Game::gameWonRender(){
+	SDL_RenderClear(renderer);
+	gameWonText->render(renderer, windowRect);
+	SDL_RenderPresent(renderer);
+}
 void Game::handleEvents()//Comprueba eventos
 {
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT)
 		{
-			exit = true;
+			exit = true;	
+			exitlevel = true;
 		}
 		else if (event.type == SDL_KEYDOWN){
 			if (event.key.keysym.sym == SDLK_DOWN){
@@ -241,12 +307,31 @@ int Game::getWinH(){//Pide el ancho de la altura
 	return winHeight;
 }
 void Game::run(){
-	createMap();
-	while (!exit){
-		handleEvents();
-		update();
-		render();
-		SDL_Delay(200);
+	menuRender();//Pinta la página principal
+	while (!exitMenu){//Este bucle controla la pulsación del menú
+		menuEvents();		
+	}
+
+	while (level < 6 && !exit){//Este bucle controle que no se salga o se haya superado el nivel máximo
+		nextLevel();//Selecciona el siguiente nivel (Empieza en 1)
+		while (!exitlevel){//Bucle de la pantalla de juego
+			handleEvents();
+			update();
+			render();
+			SDL_Delay(150);
+		}
+		delete gamemap;//Borra el gamemap actual
+		if (gameover){//Si se activa el flag de game over se pinta la pantalla y posteriormente se sale del bucle
+			gameOverRender();
+		}
+		else if(!exit){
+			if (level < 6){//Si todavía hay niveles restantes se activa la pantalla de siguiente nivel en lo que se carga el mapa
+				nextLevelRender();
+			}
+			else{
+				gameWonRender();//Si llegas al nivel máximo has superado el juego				
+			}
+		}
 	}
 }
 bool Game::PacmanBlueColl(){//Comprueba si hay un fantasma azul en la posición que Pacman
@@ -286,10 +371,13 @@ void Game::resetPositions(){//Reinicia las posiciones de los fantasmas y el pacm
 	orangeGhost->backToIni();
 }
 void Game::gameOver(){//Termina el juego cuando has perdido
+	gameover = true;
 	exit = true;
+	exitlevel = true;
 }
 void Game::gameWon(){//Termina el juego cuando ganas
-	exit = true;
+	exitlevel = true;
+	level++;
 }
 
 void Game::handleCollision(){//Gestiona las colisiones entre Pacman y los fantasmas

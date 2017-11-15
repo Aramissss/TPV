@@ -22,7 +22,7 @@ private:
 	//Posiciones iniciales 
 	uint xIni;
 	uint yIni;
-	uint nx, ny;//La posición siguiente calculada
+	int nx, ny;//La posición siguiente calculada
 	int dirX, dirY;//Dirección actual del fantasma
 	uint Frow, Fcol;//Filas y columnas donde están los frames en la imagen fuente
 	uint IniFrow, IniFcol;//Filas y columnas que tienen al principio
