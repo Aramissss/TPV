@@ -32,7 +32,6 @@ public:
 	Pacman* pacman;
 	Ghost* redGhost;
 	Ghost* orangeGhost;
-	//Ghost* pinkGhost;
 	Ghost* blueGhost;
 	Ghost* purpleGhost;
 
@@ -40,7 +39,6 @@ public:
 	Texture* pacmanText;
 	Texture* redText;
 	Texture* orangeText;
-	//Texture* pinkText;
 	Texture* blueText;
 	Texture* purpleText;
 	//Fin Texturas
@@ -58,6 +56,7 @@ public:
 	void createMap();
 	void substractFood();
 	void substractVitamin();
+	void checkEndGame();
 	int getRows();
 	int getCols();
 	MapCell getCell(int x, int y);
@@ -66,6 +65,9 @@ public:
 	bool PacmanRedColl();
 	bool PacmanPurpleColl();
 	bool PacmanOrangeColl();
+	void resetPositions();
 	void handleCollision();
+	void gameOver();
+	void gameWon();
 };
 

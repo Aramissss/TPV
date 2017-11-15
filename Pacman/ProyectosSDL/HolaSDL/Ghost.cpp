@@ -9,15 +9,14 @@ Ghost::Ghost(Game *dir, uint xI, uint yI, uint FcolI)
 	srand(time(NULL));
 	game = dir;
 	texture = game->pacmanText;
-	gameMap = game->gamemap;
 	Fcol = IniFcol=FcolI;
 	Frow = IniFrow= 0;
 	bFrow = 0;
 	bFcol = 12;
 	x = xIni = xI;
 	y = yIni = yI;
-	destRect.w = w =game->getWinW() / gameMap->getCols();//Calcula el tamaño del Pacman teniendo en relación la anchura de la ventana y las columnas
-	destRect.h = h = game->getWinH() / gameMap->getRows();
+	destRect.w = w =game->getWinW() / game->getCols();//Calcula el tamaño del Pacman teniendo en relación la anchura de la ventana y las columnas
+	destRect.h = h = game->getWinH() / game->getRows();
 	destRect.x = xIni*w;
 	destRect.y = yIni*h;
 	dirY = 1;
@@ -26,10 +25,8 @@ Ghost::Ghost(Game *dir, uint xI, uint yI, uint FcolI)
 
 Ghost::~Ghost()
 {
-	texture->~Texture();
-	delete texture;
-	delete gameMap;
-	delete game;
+	//delete texture;
+	//delete game;
 }
 void Ghost::backToIni(){//Método que hace que los fantasmas regresen a su pos inicial
 	x = xIni;

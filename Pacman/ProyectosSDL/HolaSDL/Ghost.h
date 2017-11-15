@@ -28,7 +28,6 @@ private:
 	uint IniFrow, IniFcol;//Filas y columnas que tienen al principio
 	uint bFrow, bFcol;//Filas y columnas de los sprites azules
 	Game* game;
-	GameMap* gameMap;//Puntero provisional al mapa
 	Texture* texture;
 	SDL_Rect destRect, srcRect;
 	vector<par> dir;

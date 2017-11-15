@@ -9,6 +9,6 @@ using namespace std;
 int main(int argc, char* argv[]){
 	Game* game = new Game;
 	game->run();
-	//game->~Game();
+	delete game;
 	return 0;
 }

@@ -49,24 +49,26 @@ Game::Game()
 Game::~Game()
 {
 	//Borra entidades
-	pacman->~Pacman();
-	redGhost->~Ghost();
-	orangeGhost->~Ghost();
-	//pinkGhost->~Ghost();
-	blueGhost->~Ghost();
-	purpleGhost->~Ghost();
+	delete pacmanText;
+	delete redText;
+	delete blueText;
+	delete orangeText;
+	delete purpleText;
 	//Fin
 
-	gamemap->~GameMap();
+	delete gamemap;
 
-	//Borra punteros
+	//Borra entidades
 	delete pacman;
 	delete redGhost;
 	delete orangeGhost;
-	//delete pinkGhost;
 	delete blueGhost;
 	delete purpleGhost;
 	//Fin
+
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
 
 }
 void Game::createMap()//Lee de un archivo y crea la matriz del mapa
@@ -146,6 +148,7 @@ void Game::update(){
 	blueGhost->update();
 	purpleGhost->update();
 	handleCollision();
+	checkEndGame();
 }
 void Game::render(){
 	SDL_RenderClear(renderer);
@@ -184,7 +187,7 @@ bool Game::nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la s
 	}
 	else return false;
 }
-void Game::handleEvents()
+void Game::handleEvents()//Comprueba eventos
 {
 	while (SDL_PollEvent(&event) && !exit) {
 		if (event.type == SDL_QUIT)
@@ -211,30 +214,30 @@ MapCell Game::getCell(int x, int y)//Devuelve el valor que hay en una celda
 {
 	return gamemap->cells[y][x];//La representación en la celda es al contrario
 }
-void Game::changeCell(int x, int y, MapCell cell)
+void Game::changeCell(int x, int y, MapCell cell)//Cambia el valor de una celda, se usa en el pacman al comer una vitamina o comida y cambiarla por empty
 {
 	gamemap->cells[y][x] = cell;
 }
-void Game::substractFood()
+void Game::substractFood()//Resta 1 al contador de comida
 {
 	gamemap->foods--;
 }
-void Game::substractVitamin()
+void Game::substractVitamin()//Resta 1 al contador de vitamina
 {
-	gamemap->vitamins;
+	gamemap->vitamins--;
 }
-int Game::getRows()
+int Game::getRows()//Pide las filas
 {
 	return gamemap->rows;
 }
-int Game::getCols()
+int Game::getCols()//Pide las columnas
 {
 	return gamemap->cols;
 }
-int Game::getWinW(){
+int Game::getWinW(){//Pide el ancho de la ventana
 	return winWidth;
 }
-int Game::getWinH(){
+int Game::getWinH(){//Pide el ancho de la altura
 	return winHeight;
 }
 void Game::run(){
@@ -270,15 +273,32 @@ bool Game::PacmanOrangeColl(){//Comprueba si hay un fantasma naranja en la posic
 	}
 	else return false;
 }
+void Game::checkEndGame(){//Comprueba que no quedan comidas ni vitaminas en el mapa
+	if (gamemap->getFoods() + gamemap->getVitamins()==0){
+		gameWon();
+	}
+}
+void Game::resetPositions(){//Reinicia las posiciones de los fantasmas y el pacman
+	pacman->backToIni();
+	redGhost->backToIni();
+	blueGhost->backToIni();
+	purpleGhost->backToIni();
+	orangeGhost->backToIni();
+}
+void Game::gameOver(){//Termina el juego cuando has perdido
+	exit = true;
+}
+void Game::gameWon(){//Termina el juego cuando ganas
+	exit = true;
+}
+
 void Game::handleCollision(){//Gestiona las colisiones entre Pacman y los fantasmas
 	if (PacmanBlueColl()){
 		if (!blueGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
 			pacman->die();
-			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
-			redGhost->backToIni();
-			orangeGhost->backToIni();
-			purpleGhost->backToIni();
-			pacman->backToIni();
+			render();//Pinta justo después de morir y hace un delay para comprender mejor la escena
+			SDL_Delay(500);
+			resetPositions();
 		}
 		else{//Vuelve a su posición inicial y se vuelve invulnerable
 			blueGhost->backToIni();
@@ -288,11 +308,9 @@ void Game::handleCollision(){//Gestiona las colisiones entre Pacman y los fantas
 	else if (PacmanRedColl()){
 		if (!redGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
 			pacman->die();
-			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
-			redGhost->backToIni();
-			orangeGhost->backToIni();
-			purpleGhost->backToIni();
-			pacman->backToIni();
+			render();
+			SDL_Delay(500);
+			resetPositions();
 		}
 		else{//Vuelve a su posición inicial y se vuelve invulnerable
 			redGhost->backToIni();
@@ -302,11 +320,9 @@ void Game::handleCollision(){//Gestiona las colisiones entre Pacman y los fantas
 	else if (PacmanPurpleColl()){
 		if (!purpleGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
 			pacman->die();
-			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
-			redGhost->backToIni();
-			orangeGhost->backToIni();
-			purpleGhost->backToIni();
-			pacman->backToIni();
+			render();
+			SDL_Delay(500);
+			resetPositions();
 		}
 		else{//Vuelve a su posición inicial y se vuelve invulnerable
 			purpleGhost->backToIni();
@@ -316,11 +332,9 @@ void Game::handleCollision(){//Gestiona las colisiones entre Pacman y los fantas
 	else if (PacmanOrangeColl()){
 		if (!orangeGhost->getVulnerability()){//Si el fantasma en cuestión es invulnerable, Pacman pierde una vida
 			pacman->die();
-			blueGhost->backToIni();//Los fantasmas y pacman regresan a su posición inicial
-			redGhost->backToIni();
-			orangeGhost->backToIni();
-			purpleGhost->backToIni();
-			pacman->backToIni();
+			render();
+			SDL_Delay(500);
+			resetPositions();
 		}
 		else{//Vuelve a su posición inicial y se vuelve invulnerable
 			orangeGhost->backToIni();

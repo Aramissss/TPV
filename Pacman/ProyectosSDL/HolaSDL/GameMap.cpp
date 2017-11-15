@@ -27,19 +27,19 @@ GameMap::~GameMap()
 		delete[] cells;
 	}
 }
-int GameMap::getRows(){
+int GameMap::getRows(){//Pide las filas
 	return rows;
 }
-int GameMap::getCols(){
+int GameMap::getCols(){//Pide las columnas
 	return cols;
 }
-int GameMap::getWalls(){
+int GameMap::getWalls(){//Pide paredes
 	return walls;
 }
-int GameMap::getFoods(){
+int GameMap::getFoods(){//Pide número de comida
 	return foods;
 }
-int GameMap::getVitamins(){
+int GameMap::getVitamins(){//Pide número de vitaminas
 	return vitamins;
 }
 void GameMap::mapTexts()
@@ -63,7 +63,7 @@ void GameMap::mapTexts()
 		VitaminsTex[i]->load(game->renderer, "..\\images\\burguer1.png", 1, 1);
 	}
 }
-void GameMap::renderMap()
+void GameMap::renderMap()//Pinta el mapa
 {
 	uint w = 0;
 	uint f = 0;

@@ -8,7 +8,7 @@ Texture::Texture()
 
 Texture::~Texture()
 {
-	delete texture;
+	//delete texture;
 }
 
 bool Texture::load(SDL_Renderer* renderer, string filename, uint numRows, uint numCols){

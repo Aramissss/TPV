@@ -18,9 +18,8 @@ Pacman::Pacman(Game *dir, uint xI, uint yI)//Dirección al juego
 }
 Pacman::~Pacman()
 {
-	texture->~Texture();
-	delete texture;
-	delete game;
+	//delete texture;
+	//delete game;
 }
 
 
@@ -120,8 +119,10 @@ int Pacman::getPosY(){
 	return y;
 }
 void Pacman::die(){//Resta una vida a Pacman
-	lives--;
-	cout << lives;
+	lives--;	
+	if (lives < 0){
+		game->gameOver();
+	}
 }
 void Pacman::backToIni(){
 	x = xIni;
