@@ -3,8 +3,8 @@
 
 Pacman::Pacman(Game *dir, uint xI, uint yI)//Dirección al juego
 {
-	Frow = 0;
-	Fcol = 11;
+	Frow = IniFrow= 0;
+	Fcol = IniFcol = 10;
 	game = dir;
 	texture = game->pacmanText;
 	destRect.w = w = game->getWinW() / game->getCols();//Calcula el tamaño del Pacman teniendo en relación la anchura de la ventana y las columnas
@@ -52,6 +52,7 @@ void Pacman::move(){
 		dirX = ndirX; // entonces la dirección actual toma ese valor (Búffer)
 		dirY = ndirY;
 	}
+	handleAnimation();
 	nx = ny = 0;
 	if (game->nextCell(x, y, dirX, dirY, nx, ny))//Si la posición siguiente devuelve true, entonces se puede mover
 	{
@@ -72,6 +73,36 @@ void Pacman::move(){
 			game->changeCell(nx, ny, Empty);
 		}
 	}
+}
+void Pacman::handleAnimation(){
+	if (dirX == 1 && dirY == 0){
+		rightAnimation();
+	}
+	else if (dirX == -1 && dirY == 0){
+		leftAnimation();
+	}
+	else if (dirX == 0 && dirY == 1){
+		downAnimation();
+	}
+	else if (dirX == 0 && dirY == -1){
+		upAnimation();
+	}
+}
+void Pacman::upAnimation(){
+	Frow = 3;
+	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+}
+void Pacman::downAnimation(){
+	Frow = 1;
+	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+}
+void Pacman::leftAnimation(){
+	Frow = 2;
+	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
+}
+void Pacman::rightAnimation(){
+	Frow = 0;
+	Fcol = IniFcol + ((SDL_GetTicks() / 500) % 2);
 }
 void Pacman::render(){
 	texture->renderFrame(game->renderer, srcRect, destRect, Frow, Fcol);

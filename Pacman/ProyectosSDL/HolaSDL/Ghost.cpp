@@ -11,7 +11,9 @@ Ghost::Ghost(Game *dir, uint xI, uint yI, uint FcolI)
 	texture = game->pacmanText;
 	gameMap = game->gamemap;
 	Fcol = IniFcol=FcolI;
-	Frow = IniFrow= 1;
+	Frow = IniFrow= 0;
+	bFrow = 0;
+	bFcol = 12;
 	x = xIni = xI;
 	y = yIni = yI;
 	destRect.w = w =game->getWinW() / gameMap->getCols();//Calcula el tamaño del Pacman teniendo en relación la anchura de la ventana y las columnas
@@ -53,21 +55,21 @@ void Ghost::move()//Escoge una dirección aleatoria del vector y la aplica
 
 	x += dirX;
 	y += dirY;
-	if (y >= game->getCols())//Estas condiciones hacen que el mapa tenga forma toroide
+	if (x >= game->getCols())//Estas condiciones hacen que el mapa tenga forma toroide
 	{
-		y = 0;
+		x = 0;
 	}
-	else if (y < 0)
+	else if (x < 0)
 	{
-		y = game->getCols() - 1;
+		x = game->getCols() - 1;
 	}
-	if (x < 0)
+	if (y < 0)
 	{
-		x = game->getRows() - 1;
+		y = game->getRows() - 1;
 	}
 	else if (x >= game->getRows())
 	{
-		x = 0;
+		y = 0;
 	}
 	dir.clear();//Limpia el vector de direcciones
 }
@@ -120,6 +122,18 @@ void Ghost::update(){
 	if (vulnerable && (clock() - startTime) / CLOCKS_PER_SEC >= 5){//Si es vulnerable llama a un contador
 		vulnerabilityOff();//Después de 5 segundos se vuelve invulnerable
 	}
+	if (!vulnerable){
+		standardAnimation();
+	}
+	else blueAnimation();
+}
+void Ghost::standardAnimation(){//Se encarga de las animaciones cuando son invulnerables
+	Fcol = IniFcol+((SDL_GetTicks() / 500) % 2);
+	Frow = IniFrow + ((SDL_GetTicks() / 500) % 4);
+}
+void Ghost::blueAnimation(){//Hace la animación de cuando los fantasmas están azules
+	Fcol = bFcol + ((SDL_GetTicks() / 500) % 2);
+	Frow = bFrow + ((SDL_GetTicks() / 500) % 2);
 }
 int Ghost::getPosX(){//Devuelve la posición x
 	return x;
@@ -133,11 +147,11 @@ bool Ghost::getVulnerability(){
 void Ghost::vulnerabilityOn(){//Método que hace que el fantasma pueda ser comido
 	vulnerable = true;
 	startTime = clock();	
-	Frow = 0;//Cambia el sprite al color azul
-	Fcol = 12;
+	//Frow = 0;//Cambia el sprite al color azul
+	//Fcol = 12;
 }
 void Ghost::vulnerabilityOff(){//Método que vuelve al fantasma invulnerable
 	vulnerable = false;	
-	Frow = IniFrow;
-	Fcol = IniFcol;
+	//Frow = IniFrow;
+	//Fcol = IniFcol;
 }

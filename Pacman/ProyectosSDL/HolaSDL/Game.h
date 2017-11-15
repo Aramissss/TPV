@@ -58,8 +58,8 @@ public:
 	void createMap();
 	void substractFood();
 	void substractVitamin();
-	uint getRows();
-	uint getCols();
+	int getRows();
+	int getCols();
 	MapCell getCell(int x, int y);
 	void changeCell(int x, int y, MapCell cell);
 	bool PacmanBlueColl();

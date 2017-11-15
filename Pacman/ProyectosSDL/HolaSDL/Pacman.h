@@ -12,6 +12,7 @@ private:
 	uint nx, ny;//La posición siguiente calculada
 	int dirX, dirY, ndirX, ndirY;
 	uint Frow, Fcol;//Columnas donde están los frames en la imagen fuente
+	uint IniFrow, IniFcol; //Columnas iniciales donde están los frames
 	Game* game;
 	Texture* texture;
 	SDL_Rect destRect, srcRect;
@@ -19,6 +20,11 @@ private:
 public:
 	Pacman(Game *dir, uint xI, uint yI);
 	~Pacman();
+	void handleAnimation();
+	void upAnimation();
+	void downAnimation();
+	void leftAnimation();
+	void rightAnimation();
 	bool checkGhost();
 	void changeDir(char dir);
 	void move();

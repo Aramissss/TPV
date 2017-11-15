@@ -162,21 +162,21 @@ bool Game::nextCell(int x, int y, int dirX, int dirY, int& nx, int& ny)//Si la s
 {
 	nx = x + dirX;//Calcula la posición siguiente
 	ny = y + dirY;
-	if (ny >= gamemap->cols)//Estas condiciones hacen que el mapa tenga forma toroide
-	{
-		ny = 0;
-	}
-	else if (ny < 0)
-	{
-		ny = gamemap->cols - 1;
-	}
-	if (nx < 0)
-	{
-		nx = gamemap->rows - 1;
-	}
-	else if (nx >= gamemap->rows)
+	if (nx >= gamemap->getCols())//Estas condiciones hacen que el mapa tenga forma toroide
 	{
 		nx = 0;
+	}
+	else if (nx < 0)
+	{
+		nx = gamemap->getCols() - 1;
+	}
+	if (ny < 0)
+	{
+		ny = gamemap->getRows() - 1;
+	}
+	else if (ny >= gamemap->getRows())
+	{
+		ny = 0;
 	}
 	if (gamemap->cells[ny][nx] != Wall)
 	{
@@ -223,11 +223,11 @@ void Game::substractVitamin()
 {
 	gamemap->vitamins;
 }
-uint Game::getRows()
+int Game::getRows()
 {
 	return gamemap->rows;
 }
-uint Game::getCols()
+int Game::getCols()
 {
 	return gamemap->cols;
 }

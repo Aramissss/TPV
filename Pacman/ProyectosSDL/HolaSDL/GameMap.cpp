@@ -27,19 +27,19 @@ GameMap::~GameMap()
 		delete[] cells;
 	}
 }
-uint GameMap::getRows(){
+int GameMap::getRows(){
 	return rows;
 }
-uint GameMap::getCols(){
+int GameMap::getCols(){
 	return cols;
 }
-uint GameMap::getWalls(){
+int GameMap::getWalls(){
 	return walls;
 }
-uint GameMap::getFoods(){
+int GameMap::getFoods(){
 	return foods;
 }
-uint GameMap::getVitamins(){
+int GameMap::getVitamins(){
 	return vitamins;
 }
 void GameMap::mapTexts()

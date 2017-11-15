@@ -18,7 +18,7 @@ class Ghost
 {
 private:
 
-	uint x, y, w, h;
+	int x, y, w, h;
 	//Posiciones iniciales 
 	uint xIni;
 	uint yIni;
@@ -26,6 +26,7 @@ private:
 	int dirX, dirY;//Dirección actual del fantasma
 	uint Frow, Fcol;//Filas y columnas donde están los frames en la imagen fuente
 	uint IniFrow, IniFcol;//Filas y columnas que tienen al principio
+	uint bFrow, bFcol;//Filas y columnas de los sprites azules
 	Game* game;
 	GameMap* gameMap;//Puntero provisional al mapa
 	Texture* texture;
@@ -37,6 +38,8 @@ private:
 public:
 	Ghost(Game *dir, uint xI, uint yI, uint FcolI);
 	~Ghost();
+	void blueAnimation();
+	void standardAnimation();
 	bool getVulnerability();
 	int getPosX();
 	int getPosY();

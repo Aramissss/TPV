@@ -26,11 +26,11 @@ public:
 	MapCell** cells;
 	GameMap(Game* dir,uint rows, uint cols);
 	~GameMap();
-	uint getRows();
-	uint getCols();
-	uint getWalls();
-	uint getFoods();
-	uint getVitamins();
+	int getRows();
+	int getCols();
+	int getWalls();
+	int getFoods();
+	int getVitamins();
 	void mapTexts();
 	void renderMap();
 };
