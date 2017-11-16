@@ -42,7 +42,7 @@ int GameMap::getFoods(){//Pide número de comida
 int GameMap::getVitamins(){//Pide número de vitaminas
 	return vitamins;
 }
-void GameMap::mapTexts()
+void GameMap::mapTexts()//Cambia el tamaño de los vectores de texturas y las carga
 {
 	WallsTex.resize(walls);
 	FoodsTex.resize(foods);

@@ -30,25 +30,29 @@ private:
 	Game* game;
 	Texture* texture;
 	SDL_Rect destRect, srcRect;
-	vector<par> dir;
-	bool vulnerable;
+	vector<par> dir;//Vector que guarda las direcciones accesibles
+	bool vulnerable;//Booleano que indica si el fantasma se puede comer o no
 	clock_t startTime;
 
 public:
 	Ghost(Game *dir, uint xI, uint yI, uint FcolI);
 	~Ghost();
-	void blueAnimation();
-	void standardAnimation();
-	bool getVulnerability();
+
 	int getPosX();
 	int getPosY();
-	void backToIni();
-	void searchDir();
-	void changeDir(int dirX, int dirY);
-	void move();
-	void render();
-	void update();
+	bool getVulnerability();
+
+	void blueAnimation();
+	void standardAnimation();
+
 	void vulnerabilityOn();
 	void vulnerabilityOff();
+	
+	void searchDir();
+	void move();
+	void update();
+	void render();	
+
+	void backToIni();
 };
 

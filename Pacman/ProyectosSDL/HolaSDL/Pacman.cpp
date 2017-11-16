@@ -19,11 +19,48 @@ Pacman::Pacman(Game *dir, uint xI, uint yI)//Dirección al juego
 Pacman::~Pacman()
 {	
 }
-int Pacman::getLives(){
+int Pacman::getLives(){//Devuelve las vidas actuales
 	return lives;
 }
+int Pacman::getPosX(){//Devuelve la posición x
+	return x;
+}
+int Pacman::getPosY(){//Devuelve la posición y
+	return y;
+}
 
-void Pacman::changeDir(char dir){//Según la letra introducida cambia la dirección si es posible
+void Pacman::handleAnimation(){//Controla animación que se ejecuta según la dirección actual
+	if (dirX == 1 && dirY == 0){
+		rightAnimation();
+	}
+	else if (dirX == -1 && dirY == 0){
+		leftAnimation();
+	}
+	else if (dirX == 0 && dirY == 1){
+		downAnimation();
+	}
+	else if (dirX == 0 && dirY == -1){
+		upAnimation();
+	}
+}
+void Pacman::upAnimation(){//Animación arriba
+	Frow = 3;
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
+}
+void Pacman::downAnimation(){//Animación abajo
+	Frow = 1;
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
+}
+void Pacman::leftAnimation(){//Animación izquierda
+	Frow = 2;
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
+}
+void Pacman::rightAnimation(){//Animación derecha
+	Frow = 0;
+	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
+}
+
+void Pacman::changeDir(char dir){//Según la letra introducida cambia la dirección
 	int nx, ny;
 	nx = ny = 0;
 	if (dir == 'u'){//Up
@@ -44,14 +81,14 @@ void Pacman::changeDir(char dir){//Según la letra introducida cambia la direcció
 	}
 
 }
-void Pacman::move(){
+void Pacman::move(){//Aplica la dirección siguiente si es posible
 	int nx=0;
 	int ny=0;
 	if (game->nextCell(x, y, ndirX, ndirY, nx, ny)){//Si la posición pulsada en ese momento es posible
 		dirX = ndirX; // entonces la dirección actual toma ese valor (Búffer)
 		dirY = ndirY;
 	}
-	handleAnimation();
+	handleAnimation();//Aplica la animación según la dirección
 	nx = ny = 0;
 	if (game->nextCell(x, y, dirX, dirY, nx, ny))//Si la posición siguiente devuelve true, entonces se puede mover
 	{
@@ -73,58 +110,23 @@ void Pacman::move(){
 		}
 	}
 }
-void Pacman::handleAnimation(){
-	if (dirX == 1 && dirY == 0){
-		rightAnimation();
-	}
-	else if (dirX == -1 && dirY == 0){
-		leftAnimation();
-	}
-	else if (dirX == 0 && dirY == 1){
-		downAnimation();
-	}
-	else if (dirX == 0 && dirY == -1){
-		upAnimation();
-	}
-}
-void Pacman::upAnimation(){
-	Frow = 3;
-	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
-}
-void Pacman::downAnimation(){
-	Frow = 1;
-	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
-}
-void Pacman::leftAnimation(){
-	Frow = 2;
-	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
-}
-void Pacman::rightAnimation(){
-	Frow = 0;
-	Fcol = IniFcol + ((SDL_GetTicks() / 150) % 2);
-}
-void Pacman::render(){
-	texture->renderFrame(game->renderer, srcRect, destRect, Frow, Fcol);
-}
 
-void Pacman::update(){
+void Pacman::update(){//Lleva el movimiento y el lugar donde se pinta
 	move();
 	destRect.x = x*w;
 	destRect.y = y*h;
 }
-int Pacman::getPosX(){
-	return x;
+void Pacman::render(){//Pinta la textura
+	texture->renderFrame(game->renderer, srcRect, destRect, Frow, Fcol);
 }
-int Pacman::getPosY(){
-	return y;
-}
+
 void Pacman::die(){//Resta una vida a Pacman
 	lives--;	
 	if (lives < 0){
 		game->gameOver();
 	}
 }
-void Pacman::backToIni(){
+void Pacman::backToIni(){//Regresa a la posición inicial
 	x = xIni;
 	y = yIni;
 }

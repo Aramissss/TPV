@@ -2,7 +2,6 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Texture.h"
-#include "GameMap.h"
 using namespace std;
 class Game;
 class Pacman
@@ -21,18 +20,20 @@ public:
 	Pacman(Game *dir, uint xI, uint yI);
 	~Pacman();
 	int getLives();
+	int getPosX();
+	int getPosY();
+
 	void handleAnimation();
 	void upAnimation();
 	void downAnimation();
 	void leftAnimation();
 	void rightAnimation();
-	bool checkGhost();
+	
 	void changeDir(char dir);
-	void move();
-	void render();
+	void move();	
 	void update();
-	int getPosX();
-	int getPosY();
+	void render();
+	
 	void die();
 	void backToIni();
 };

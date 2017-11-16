@@ -4,14 +4,10 @@
 Texture::Texture()
 {
 }
-
-
 Texture::~Texture()
 {
-	//delete texture;
 }
-
-bool Texture::load(SDL_Renderer* renderer, string filename, uint numRows, uint numCols){
+bool Texture::load(SDL_Renderer* renderer, string filename, uint numRows, uint numCols){//Carga la textura a parti de un archivo
 
 	SDL_Surface* surface = IMG_Load(filename.c_str());
 	texture = SDL_CreateTextureFromSurface(renderer, surface);	
@@ -23,10 +19,10 @@ bool Texture::load(SDL_Renderer* renderer, string filename, uint numRows, uint n
 	SDL_FreeSurface(surface);
 	return true;
 }
-void Texture::render(SDL_Renderer* renderer, const SDL_Rect& destRect, SDL_RendererFlip flip){
+void Texture::render(SDL_Renderer* renderer, const SDL_Rect& destRect, SDL_RendererFlip flip){//Copia la textura al render
 	SDL_RenderCopy(renderer, texture, nullptr, &destRect);
 }
-void Texture::renderFrame(SDL_Renderer* renderer, SDL_Rect& srcRect, const SDL_Rect& destRect, int row, int col, SDL_RendererFlip flip){
+void Texture::renderFrame(SDL_Renderer* renderer, SDL_Rect& srcRect, const SDL_Rect& destRect, int row, int col, SDL_RendererFlip flip){//Pinta un frame determinado
 	srcRect.x = fw*(col);//El rectángulo fuente se posiciona según la columna
 	srcRect.y = fh*(row);
 	srcRect.w = fw;

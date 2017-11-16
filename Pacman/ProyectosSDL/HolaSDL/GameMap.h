@@ -31,6 +31,7 @@ public:
 	int getWalls();
 	int getFoods();
 	int getVitamins();
+
 	void mapTexts();
 	void renderMap();
 };
