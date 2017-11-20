@@ -10,9 +10,12 @@ class GameMap
 {
 	friend class Game;	
 private:
-	vector<Texture*> WallsTex;
-	vector<Texture*> FoodsTex;
-	vector<Texture*> VitaminsTex;
+	//vector<Texture*> WallsTex;
+	//vector<Texture*> FoodsTex;
+	//vector<Texture*> VitaminsTex;
+	Texture* WallTex;
+	Texture* FoodTex;
+	Texture* VitaminTex;
 	Game* game;
 	SDL_Rect size;
 	uint rows;

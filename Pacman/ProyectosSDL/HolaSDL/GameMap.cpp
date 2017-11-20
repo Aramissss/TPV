@@ -44,9 +44,17 @@ int GameMap::getVitamins(){//Pide número de vitaminas
 }
 void GameMap::mapTexts()//Cambia el tamaño de los vectores de texturas y las carga
 {
+	/*
 	WallsTex.resize(walls);
 	FoodsTex.resize(foods);
-	VitaminsTex.resize(vitamins);
+	VitaminsTex.resize(vitamins);*/
+	WallTex = new Texture();
+	FoodTex = new Texture();
+	VitaminTex = new Texture();
+	WallTex->load(game->renderer, "..\\images\\wall2.png", 1, 1);
+	FoodTex->load(game->renderer, "..\\images\\food2.png", 1, 1);
+	VitaminTex->load(game->renderer, "..\\images\\burguer1.png", 1, 1);
+	/*
 	for (int i = 0; i < walls; i++)
 	{
 		WallsTex[i] = new Texture();
@@ -62,6 +70,7 @@ void GameMap::mapTexts()//Cambia el tamaño de los vectores de texturas y las car
 		VitaminsTex[i] = new Texture();
 		VitaminsTex[i]->load(game->renderer, "..\\images\\burguer1.png", 1, 1);
 	}
+	*/
 }
 void GameMap::renderMap()//Pinta el mapa
 {
@@ -79,7 +88,7 @@ void GameMap::renderMap()//Pinta el mapa
 				rect.w = size.w;
 				rect.x = j*size.w;
 				rect.y = i*size.h;
-				WallsTex[w]->render(game->renderer, rect);
+				WallTex->render(game->renderer, rect);
 				w++;
 
 			}
@@ -89,7 +98,7 @@ void GameMap::renderMap()//Pinta el mapa
 				rect.w = size.w;
 				rect.x = j*size.w;
 				rect.y = i*size.h;
-				FoodsTex[f]->render(game->renderer, rect);
+				FoodTex->render(game->renderer, rect);
 				f++;
 
 			}
@@ -99,7 +108,7 @@ void GameMap::renderMap()//Pinta el mapa
 				rect.w = size.w;
 				rect.x = j*size.w;
 				rect.y = i*size.h;
-				VitaminsTex[v]->render(game->renderer, rect);
+				VitaminTex->render(game->renderer, rect);
 				v++;
 
 			}

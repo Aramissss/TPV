@@ -256,12 +256,14 @@ void Game::run(){//Controla el bucle del juego
 	}
 	while (level < 6 && !exit){//Este bucle controla que no se salga o se haya superado el nivel máximo
 		nextLevel();//Selecciona el siguiente nivel (Empieza en 1)
+		SDL_Delay(1000);
 		while (!exitlevel){//Bucle de la pantalla de juego
 			handleEvents();
 			update();
 			render();
 			SDL_Delay(150);
 		}
+		
 		delete gamemap;//Borra el gamemap actual
 		if (gameover){//Si se activa el flag de game over se pinta la pantalla y posteriormente se sale del bucle
 			userinterface->gameOverRender();
@@ -274,6 +276,7 @@ void Game::run(){//Controla el bucle del juego
 				userinterface->gameWonRender();//Si llegas al nivel máximo has superado el juego				
 			}
 		}
+		SDL_Delay(1000);
 	}
 }
 
