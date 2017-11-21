@@ -1,5 +1,7 @@
-﻿  Game.cpp
-c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\game.cpp(149): warning C4018: '<': signed/unsigned mismatch
-c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\game.cpp(151): warning C4018: '<': signed/unsigned mismatch
+﻿  GameMap.cpp
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(14): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(24): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(63): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(65): warning C4018: '<': signed/unsigned mismatch
   HolaSDL.vcxproj -> C:\Users\gabri\Documents\GitHub\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.exe
   HolaSDL.vcxproj -> C:\Users\gabri\Documents\GitHub\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.pdb (Full PDB)
