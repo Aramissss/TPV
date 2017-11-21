@@ -58,6 +58,7 @@ Game::~Game()
 	delete orangeGhost;
 	delete blueGhost;
 	delete purpleGhost;
+	delete userinterface;
 	//Fin
 
 	SDL_DestroyRenderer(renderer);

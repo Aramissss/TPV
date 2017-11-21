@@ -6,6 +6,7 @@
 #include "GameMap.h"
 #include  <cstdlib>
 #include <time.h>
+#include "checkML.h";
 
 struct par{//Struct para guardar las direcciones
 	int x;

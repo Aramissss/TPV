@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include "Texture.h"
+#include "checkML.h";
 using namespace std;
 class Game;
 class Pacman

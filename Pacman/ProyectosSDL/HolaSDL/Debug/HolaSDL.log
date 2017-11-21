@@ -1,7 +1,11 @@
-﻿  GameMap.cpp
-c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(14): warning C4018: '<': signed/unsigned mismatch
-c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(24): warning C4018: '<': signed/unsigned mismatch
-c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(63): warning C4018: '<': signed/unsigned mismatch
-c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.cpp(65): warning C4018: '<': signed/unsigned mismatch
+﻿  Game.cpp
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\texture.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\pacman.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\gamemap.h(5): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\ghost.h(9): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\userinterface.h(6): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\game.h(10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\game.cpp(150): warning C4018: '<': signed/unsigned mismatch
+c:\users\gabri\documents\github\tpv\pacman\proyectossdl\holasdl\game.cpp(152): warning C4018: '<': signed/unsigned mismatch
   HolaSDL.vcxproj -> C:\Users\gabri\Documents\GitHub\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.exe
   HolaSDL.vcxproj -> C:\Users\gabri\Documents\GitHub\TPV\Pacman\ProyectosSDL\bin\HolaSDLDebug.pdb (Full PDB)

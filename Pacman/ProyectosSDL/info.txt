@@ -1,0 +1,9 @@
+Gabriel Aramis Sardaneta del collado
+Daniel Álvarez Castro
+
+Funcionalidades adicionales:
+
+Animaciones de los fantasmas y de pacman.
+Paso de nivel cuando comes toda la comida (Empiezas en el uno y si consigues pasar los niveles puedes llegar hasta el 5).
+Pantallas de transición al empezar el juego, entre niveles y si ganas o pierdes.
+Sprites a modo de contador con las vidas que te quedan.

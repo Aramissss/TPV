@@ -3,6 +3,7 @@
 #include "SDL_image.h"
 #include "Texture.h"
 #include "GameMap.h"
+#include "checkML.h";
 #pragma once
 class Game;
 class UserInterface
@@ -19,7 +20,6 @@ private:
 	Game* game;
 public:
 	UserInterface(Game* dir);	
-	void menuEvents();
 	void menuRender();
 	void setLifeSize();
 	void renderLives();
